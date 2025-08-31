@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import AdminLayout from '../components/AdminLayout';
+import API_BASE_URL from '../api';
 
 const AdminPanel = () => {
   const [products, setProducts] = useState([]);
@@ -21,7 +22,7 @@ const AdminPanel = () => {
   const [deleteLoading, setDeleteLoading] = useState(null);
 
   useEffect(() => {
-    fetch('/api/products')
+    fetch(`${API_BASE_URL}/api/products`)
       .then(res => res.json())
       .then(responseData => {
         // Handle the new response structure with data nesting
@@ -50,7 +51,7 @@ const AdminPanel = () => {
       formData.append('image', newProduct.image);
     }
 
-    fetch('/api/products', {
+    fetch(`${API_BASE_URL}/api/products`, {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${localStorage.getItem('token')}`,
@@ -84,7 +85,7 @@ const AdminPanel = () => {
 
   const handleDelete = (id) => {
     setDeleteLoading(id);
-    fetch(`/api/products/${id}`, {
+    fetch(`${API_BASE_URL}/api/products/${id}`, {
       method: 'DELETE',
       headers: {
         Authorization: `Bearer ${localStorage.getItem('token')}`,

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import API_BASE_URL from '../api';
 
 const AdminPaymentProofs = () => {
   const [proofs, setProofs] = useState([]);
@@ -7,7 +8,7 @@ const AdminPaymentProofs = () => {
 
   useEffect(() => {
     const token = localStorage.getItem('token');
-    fetch('/api/payment-proofs', {
+    fetch(`${API_BASE_URL}/api/payment-proofs`, {
       headers: {
         Authorization: token ? `Bearer ${token}` : ''
       }

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import AdminLayout from '../components/AdminLayout';
+import API_BASE_URL from '../api';
 
 const AdminProofs = () => {
   const [proofs, setProofs] = useState([]);
@@ -9,7 +10,7 @@ const AdminProofs = () => {
 
   useEffect(() => {
     const token = localStorage.getItem('token');
-    fetch('/api/payment-proofs', {
+    fetch(`${API_BASE_URL}/api/payment-proofs`, {
       headers: {
         Authorization: token ? `Bearer ${token}` : ''
       }

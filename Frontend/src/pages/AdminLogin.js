@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
+import API_BASE_URL from '../api';
 
 const AdminLogin = () => {
   const [email, setEmail] = useState('');
@@ -20,7 +21,7 @@ const AdminLogin = () => {
     setError('');
     setLoading(true);
     try {
-      const res = await fetch('/api/users/login', {
+      const res = await fetch(`${API_BASE_URL}/api/users/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password })

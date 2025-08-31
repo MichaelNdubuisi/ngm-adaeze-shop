@@ -2,6 +2,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useCart } from '../contexts/CartContext';
+import API_BASE_URL from '../api';
 
 const ProductDetail = () => {
   const { id } = useParams();
@@ -16,7 +17,7 @@ const ProductDetail = () => {
   React.useEffect(() => {
     setLoading(true);
     setError(null);
-    fetch(`/api/products/${id}`)
+    fetch(`${API_BASE_URL}/api/products/${id}`)
       .then(res => res.json().then(responseData => ({ ok: res.ok, responseData })))
       .then(({ ok, responseData }) => {
         if (!ok) throw new Error(responseData.message || 'Product not found');

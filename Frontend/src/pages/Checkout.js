@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useCart } from '../contexts/CartContext';
 import { useNavigate } from 'react-router-dom';
 import PaystackButton from '../components/PaystackButton';
+import API_BASE_URL from '../api';
 
 const Checkout = () => {
   const { cart, dispatch } = useCart();
@@ -50,7 +51,7 @@ const Checkout = () => {
     setIsProcessing(true);
     const token = localStorage.getItem('token');
     
-    fetch('/api/orders', {
+    fetch(`${API_BASE_URL}/api/orders`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

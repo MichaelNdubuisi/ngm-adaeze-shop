@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import AdminLayout from '../components/AdminLayout';
+import API_BASE_URL from '../api';
 
 const statusOptions = ['Processing', 'Shipped', 'Delivered'];
 
@@ -14,7 +15,7 @@ const AdminOrders = () => {
     setLoading(true);
     setError(null);
     const token = localStorage.getItem('token');
-    fetch('/api/orders', {
+    fetch(`${API_BASE_URL}/api/orders`, {
       headers: {
         Authorization: token ? `Bearer ${token}` : ''
       }
@@ -33,7 +34,7 @@ const AdminOrders = () => {
 
   const handleStatusChange = (orderId, newStatus) => {
     const token = localStorage.getItem('token');
-    fetch(`/api/orders/${orderId}`, {
+    fetch(`${API_BASE_URL}/api/orders/${orderId}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
@@ -53,7 +54,7 @@ const AdminOrders = () => {
 
   const handleApprove = (orderId) => {
     const token = localStorage.getItem('token');
-    fetch(`/api/orders/${orderId}/approve`, {
+    fetch(`${API_BASE_URL}/api/orders/${orderId}/approve`, {
       method: 'PUT',
       headers: {
         Authorization: token ? `Bearer ${token}` : ''

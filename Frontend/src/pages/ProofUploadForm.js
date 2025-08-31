@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import API_BASE_URL from '../api';
 
 const ProofUploadForm = ({ defaultName = '', defaultEmail = '', productId }) => {
   const [name, setName] = useState(defaultName);
@@ -25,7 +26,7 @@ const ProofUploadForm = ({ defaultName = '', defaultEmail = '', productId }) => 
     if (productId) formData.append('product', productId);
     setLoading(true);
     try {
-      const res = await fetch('/api/payment-proofs', {
+      const res = await fetch(`${API_BASE_URL}/api/payment-proofs`, {
         method: 'POST',
         body: formData
       });

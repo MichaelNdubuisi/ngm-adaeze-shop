@@ -5,6 +5,7 @@ import bg1 from '../assets/images/bg1.jpg';
 import bg2 from '../assets/images/bg2.jpg';
 import bg3 from '../assets/images/bg3.jpg';
 import ProductList from '../components/ProductList';
+import API_BASE_URL from '../api';
 
 const bannerImages = [bg1, bg2, bg3];
 const bannerContent = [
@@ -46,7 +47,7 @@ const Home = () => {
   useEffect(() => {
     setLoading(true);
     setError(null);
-    fetch('/api/products')
+    fetch(`${API_BASE_URL}/api/products`)
       .then(res => res.json())
       .then(data => {
         // Handle the response structure from responseHelpers

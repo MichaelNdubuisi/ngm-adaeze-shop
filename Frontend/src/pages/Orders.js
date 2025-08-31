@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import API_BASE_URL from '../api';
 
 const Orders = () => {
   const [orders, setOrders] = useState([]);
@@ -11,7 +12,7 @@ const Orders = () => {
     setLoading(true);
     setError(null);
     const token = localStorage.getItem('token');
-    fetch('/api/orders', {
+    fetch(`${API_BASE_URL}/api/orders`, {
       headers: {
         Authorization: token ? `Bearer ${token}` : ''
       }
