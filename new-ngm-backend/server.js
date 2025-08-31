@@ -11,7 +11,7 @@ const userRoutes = require('./routes/userRoutes');
 const orderRoutes = require('./routes/orderRoutes');
 const uploadRoutes = require('./routes/uploadRoutes');
 const paymentRoutes = require('./routes/paymentRoutes');
-const paystackWebhook = require('./routes/paystackWebhook'); // ✅ webhook route
+const paystackWebhook = require('./routes/paystackWebhook'); // Webhook
 const paymentProofRoutes = require('./routes/paymentProofRoutes');
 
 dotenv.config();
@@ -21,22 +21,32 @@ const app = express();
 // Middleware to handle raw body for webhook
 app.use('/api/paystack/webhook', express.json({ verify: (req, res, buf) => { req.rawBody = buf; } }));
 
-// General Middlewares
+// General middlewares
 app.use(express.json());
-// Serve uploaded images statically
-app.use('/uploads', express.static(path.join(__dirname, '/uploads'))); // Body parser
-app.use('/uploads/proofs', express.static(path.join(__dirname, '/uploads/proofs'))); // Serve proof uploads
-app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:3000',
-  credentials: true,
-}));
 app.use(helmet());
 app.use(compression());
 
-// Root test route
-app.get('/', (req, res) => {
-  res.send('API is running...');
-});
+// Serve uploaded images statically
+app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
+app.use('/uploads/proofs', express.static(path.join(__dirname, '/uploads/proofs')));
+
+// CORS setup: allow your actual frontend URL
+const allowedOrigins = [
+  'http://localhost:3000', // dev
+  'https://ngm-adaeze-shop-he05eoge8-michaels-projects-2c53cb3e.vercel.app' // Vercel frontend
+];
+
+app.use(cors({
+  origin: function(origin, callback){
+    if(!origin) return callback(null, true); // server-to-server requests
+    if(allowedOrigins.indexOf(origin) === -1){
+      const msg = 'CORS policy: this origin is not allowed';
+      return callback(new Error(msg), false);
+    }
+    return callback(null, true);
+  },
+  credentials: true
+}));
 
 // API Routes
 app.use('/api/users', userRoutes);
@@ -44,8 +54,19 @@ app.use('/api/products', productRoutes);
 app.use('/api/orders', orderRoutes);
 app.use('/api/upload', uploadRoutes);
 app.use('/api/payments', paymentRoutes);
-app.use('/api/paystack/webhook', paystackWebhook); // ✅ Webhook route registered
+app.use('/api/paystack/webhook', paystackWebhook);
 app.use('/api/payment-proofs', paymentProofRoutes);
+
+// Serve React frontend (build folder)
+app.use(express.static(path.join(__dirname, 'frontend', 'build')));
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'frontend', 'build', 'index.html'));
+});
+
+// Root test route (optional)
+app.get('/api', (req, res) => {
+  res.send('API is running...');
+});
 
 // 404 handler
 app.use((req, res, next) => {
