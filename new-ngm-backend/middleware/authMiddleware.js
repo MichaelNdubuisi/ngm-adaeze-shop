@@ -10,11 +10,16 @@ const protect = async (req, res, next) => {
   ) {
     try {
       token = req.headers.authorization.split(' ')[1];
-      const decoded = jwt.verify(token, process.env.JWT_SECRET);
+      const jwtSecret = process.env.JWT_SECRET || 'fallbackjwtsecret';
+      const decoded = jwt.verify(token, jwtSecret);
       req.user = await User.findById(decoded.id).select('-password');
       return next(); // ✅ ensure next is only called on success
     } catch (error) {
       console.error('JWT verification failed:', error.message);
+      // Clear token cookie if present
+      if (req.cookies && req.cookies.token) {
+        res.clearCookie('token');
+      }
       return res.status(401).json({ message: 'Not authorized, token failed' });
     }
   }

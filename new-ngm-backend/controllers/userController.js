@@ -5,7 +5,8 @@ const bcrypt = require('bcryptjs');
 
 // Generate JWT
 const generateToken = (id) => {
-  return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: '30d' });
+  const jwtSecret = process.env.JWT_SECRET || 'fallbackjwtsecret';
+  return jwt.sign({ id }, jwtSecret, { expiresIn: '30d' });
 };
 
 // @desc    Register new user
