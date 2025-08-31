@@ -33,7 +33,8 @@ app.use('/uploads/proofs', express.static(path.join(__dirname, '/uploads/proofs'
 // CORS setup: allow your actual frontend URL
 const allowedOrigins = [
   'http://localhost:3000', // dev
-  'https://ngm-adaeze-shop-he05eoge8-michaels-projects-2c53cb3e.vercel.app' // Vercel frontend
+  'https://ngm-adaeze-shop.vercel.app', // Vercel frontend
+  'https://ngm-adaeze-shop-he05eoge8-michaels-projects-2c53cb3e.vercel.app' // Old Vercel URL
 ];
 
 app.use(cors({
