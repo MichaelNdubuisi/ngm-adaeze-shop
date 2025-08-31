@@ -31,12 +31,12 @@ const Products = () => {
         } else if (data && Array.isArray(data.products)) {
           productsData = data.products;
         }
-        // Fix product image URLs for production
-        const fixedProducts = productsData.map(product => {
-          if (product.image && !product.image.startsWith('http')) {
+        // Fix relative image URLs by prepending base URL if needed
+        const fixedProducts = productsData.map((product) => {
+          if (product.image && product.image.startsWith('/uploads')) {
             return {
               ...product,
-              image: `${API_BASE_URL}${product.image}`
+              image: `${API_BASE_URL}${product.image}`,
             };
           }
           return product;
