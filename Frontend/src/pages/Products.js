@@ -23,15 +23,25 @@ const Products = () => {
         return res.json();
       })
       .then((data) => {
+        let productsData = [];
         if (data.success && data.data && Array.isArray(data.data.products)) {
-          setProducts(data.data.products);
+          productsData = data.data.products;
         } else if (Array.isArray(data)) {
-          setProducts(data);
+          productsData = data;
         } else if (data && Array.isArray(data.products)) {
-          setProducts(data.products);
-        } else {
-          setProducts([]);
+          productsData = data.products;
         }
+        // Fix product image URLs for production
+        const fixedProducts = productsData.map(product => {
+          if (product.image && !product.image.startsWith('http')) {
+            return {
+              ...product,
+              image: `${API_BASE_URL}${product.image}`
+            };
+          }
+          return product;
+        });
+        setProducts(fixedProducts);
         setLoading(false);
       })
       .catch((err) => {
