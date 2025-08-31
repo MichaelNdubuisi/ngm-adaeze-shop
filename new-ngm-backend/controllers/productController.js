@@ -62,7 +62,15 @@ exports.createProduct = async (req, res) => {
     });
     let image = '';
     if (req.file) {
-      image = `/uploads/${req.file.filename}`;
+      // If using Cloudinary, req.file.path might be the full URL
+      if (req.file.path && req.file.path.startsWith('http')) {
+        image = req.file.path;
+      } else {
+        const baseUrl = process.env.NODE_ENV === 'production'
+          ? 'https://ngm-adaeze-shop.onrender.com'
+          : 'http://localhost:5000';
+        image = `${baseUrl}/uploads/${req.file.filename}`;
+      }
     } else {
       return res.status(400).json(responseHelpers.error('A picture is worth a thousand words! Please upload an image for this product. 📸'));
     }
