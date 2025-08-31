@@ -1,10 +1,10 @@
 {
-  "short_name": "NgmShop",
-  "name": "Ngm Adaeze Shop",
+  "short_name": "NGM App",
+  "name": "NGM & Luxury Shop",
   "icons": [
     {
       "src": "favicon.ico",
-      "sizes": "16x16 24x24 32x32 64x64",
+      "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/x-icon"
     },
     {
@@ -18,8 +18,8 @@
       "sizes": "512x512"
     }
   ],
-  "start_url": ".",
+  "start_url": "/",
   "display": "standalone",
-  "theme_color": "#001F3F",      
+  "theme_color": "#000000",
   "background_color": "#ffffff"
 }
