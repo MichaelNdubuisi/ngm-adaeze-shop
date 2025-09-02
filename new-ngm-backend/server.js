@@ -15,22 +15,23 @@ const paystackWebhook = require('./routes/paystackWebhook'); // Webhook
 const paymentProofRoutes = require('./routes/paymentProofRoutes');
 
 dotenv.config();
-
 const app = express();
 
 // Middleware to handle raw body for webhook
-app.use('/api/paystack/webhook', express.json({ verify: (req, res, buf) => { req.rawBody = buf; } }));
+app.use(
+  '/api/paystack/webhook',
+  express.json({ verify: (req, res, buf) => { req.rawBody = buf; } })
+);
 
 // General middlewares
 app.use(express.json());
 app.use(helmet());
 app.use(compression());
 
-// Serve uploaded images statically
-app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
-app.use('/uploads/proofs', express.static(path.join(__dirname, '/uploads/proofs')));
+// ✅ Serve uploaded images statically (works in dev & production)
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-// CORS setup: allow your actual frontend URL
+// CORS setup
 const allowedOrigins = [
   'http://localhost:3000', // dev
   'https://ngm-adaeze-shop.vercel.app', // Vercel frontend
@@ -58,13 +59,16 @@ app.use('/api/payments', paymentRoutes);
 app.use('/api/paystack/webhook', paystackWebhook);
 app.use('/api/payment-proofs', paymentProofRoutes);
 
-// Serve React frontend (build folder)
-app.use(express.static(path.join(__dirname, '../Frontend/build')));
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../Frontend/build', 'index.html'));
-});
+// ✅ Serve React frontend in production
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '../Frontend/build')));
+  
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../Frontend/build', 'index.html'));
+  });
+}
 
-// Root test route (optional)
+// Root test route
 app.get('/api', (req, res) => {
   res.send('API is running...');
 });

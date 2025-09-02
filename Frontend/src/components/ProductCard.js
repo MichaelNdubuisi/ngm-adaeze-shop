@@ -7,6 +7,19 @@ const ProductCard = ({ product, onAddToCart }) => {
   const [imageLoaded, setImageLoaded] = React.useState(false);
   const [imageError, setImageError] = React.useState(false);
 
+  // ✅ Make sure images load correctly in production
+  const BASE_URL = process.env.NODE_ENV === 'production'
+    ? 'https://ngm-adaeze-shop.onrender.com'
+    : '';
+
+  const imageUrl = imageError
+    ? '/api/placeholder/300/300'
+    : product.image?.startsWith('http')
+      ? product.image
+      : product.image?.startsWith('/uploads/')
+        ? `${BASE_URL}${product.image}`
+        : product.image;
+
   const handleAddToCart = (product) => {
     const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
     if (!isLoggedIn) {
@@ -18,10 +31,7 @@ const ProductCard = ({ product, onAddToCart }) => {
     setTimeout(() => setShowToast(false), 2000);
   };
 
-  const handleImageLoad = () => {
-    setImageLoaded(true);
-  };
-
+  const handleImageLoad = () => setImageLoaded(true);
   const handleImageError = () => {
     setImageError(true);
     setImageLoaded(true);
@@ -45,7 +55,7 @@ const ProductCard = ({ product, onAddToCart }) => {
         )}
         
         <img
-          src={imageError ? '/api/placeholder/300/300' : product.image}
+          src={imageUrl}
           alt={`${product.name} by ${product.brand}`}
           className={`w-full h-48 object-cover transition-all duration-500 group-hover:scale-105 ${
             imageLoaded ? 'opacity-100' : 'opacity-0'

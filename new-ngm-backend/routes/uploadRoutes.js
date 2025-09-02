@@ -8,7 +8,7 @@ const { protect, admin } = require('../middleware/authMiddleware');
 router.post('/', protect, admin, upload.single('image'), async (req, res) => {
   try {
     const result = await cloudinary.uploader.upload(req.file.path, {
-      folder: 'ecommerce-products',
+      folder: 'ngm-adaeze-shop',
     });
 
     // Safe file deletion
