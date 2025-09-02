@@ -1,3 +1,5 @@
+require('dotenv').config({ path: __dirname + '/.env' });
+
 const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
@@ -71,6 +73,20 @@ if (process.env.NODE_ENV === 'production') {
 // Root test route
 app.get('/api', (req, res) => {
   res.send('API is running...');
+});
+
+// Placeholder image route
+app.get('/api/placeholder/:width/:height', (req, res) => {
+  const { width, height } = req.params;
+  // Simple SVG placeholder
+  const svg = `
+    <svg width="${width}" height="${height}" xmlns="http://www.w3.org/2000/svg">
+      <rect width="100%" height="100%" fill="#f3f4f6"/>
+      <text x="50%" y="50%" font-family="Arial, sans-serif" font-size="16" fill="#9ca3af" text-anchor="middle" dy=".3em">No Image</text>
+    </svg>
+  `;
+  res.setHeader('Content-Type', 'image/svg+xml');
+  res.send(svg);
 });
 
 // 404 handler
