@@ -41,7 +41,7 @@ const Navbar = () => {
             <Link
               to="/"
               onClick={() => setOpen(false)}
-              className="flex flex-col items-center text-center"
+              className="flex flex-col items-center text-center focus:outline-none"
             >
               <img
                 src={Logo}
@@ -85,7 +85,7 @@ const Navbar = () => {
               />
               <button
                 type="submit"
-                className="ml-2 bg-blue-600 text-white px-4 py-1 rounded-lg text-sm font-semibold hover:bg-blue-700"
+                className="ml-2 bg-blue-600 text-white px-4 py-1 rounded-lg text-sm font-semibold hover:bg-blue-700 focus:outline-none"
               >
                 Search
               </button>
@@ -98,31 +98,31 @@ const Navbar = () => {
               <>
                 <Link
                   to="/login"
-                  className="text-gray-700 hover:text-blue-600 font-medium"
+                  className="text-gray-700 hover:text-blue-600 font-medium focus:outline-none"
                 >
                   Login
                 </Link>
                 <Link
                   to="/register"
-                  className="bg-blue-600 text-white px-5 py-2 rounded-lg text-sm font-semibold hover:bg-blue-700"
+                  className="bg-blue-600 text-white px-5 py-2 rounded-lg text-sm font-semibold hover:bg-blue-700 focus:outline-none"
                 >
                   Register
                 </Link>
               </>
             ) : isAdmin ? (
               <>
-                <Link to="/admin" className="nav-link">
+                <Link to="/admin" className="nav-link focus:outline-none">
                   Admin Panel
                 </Link>
-                <Link to="/admin/orders" className="nav-link">
+                <Link to="/admin/orders" className="nav-link focus:outline-none">
                   Orders
                 </Link>
-                <Link to="/admin/proofs" className="nav-link">
+                <Link to="/admin/proofs" className="nav-link focus:outline-none">
                   Proofs
                 </Link>
                 <button
                   onClick={handleLogout}
-                  className="text-red-600 hover:bg-red-500 hover:text-white px-4 py-2 rounded-lg"
+                  className="text-red-600 hover:bg-red-500 hover:text-white px-4 py-2 rounded-lg focus:outline-none"
                 >
                   Logout
                 </button>
@@ -131,7 +131,7 @@ const Navbar = () => {
               <>
                 <Link
                   to="/cart"
-                  className="relative flex items-center text-gray-700 hover:text-blue-600"
+                  className="relative flex items-center text-gray-700 hover:text-blue-600 focus:outline-none"
                 >
                   <svg
                     className="w-6 h-6 mr-1"
@@ -155,12 +155,12 @@ const Navbar = () => {
                     </span>
                   )}
                 </Link>
-                <Link to="/orders" className="nav-link">
+                <Link to="/orders" className="nav-link focus:outline-none">
                   My Orders
                 </Link>
                 <button
                   onClick={handleLogout}
-                  className="text-red-600 hover:bg-red-500 hover:text-white px-4 py-2 rounded-lg"
+                  className="text-red-600 hover:bg-red-500 hover:text-white px-4 py-2 rounded-lg focus:outline-none"
                 >
                   Logout
                 </button>
@@ -171,7 +171,7 @@ const Navbar = () => {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setOpen(!open)}
-            className="lg:hidden p-2 rounded-lg text-gray-700 hover:bg-gray-100"
+            className="lg:hidden p-2 rounded-lg text-gray-700 hover:bg-gray-100 focus:outline-none"
           >
             <svg
               className="w-6 h-6"
@@ -223,14 +223,14 @@ const Navbar = () => {
                     <Link
                       to="/login"
                       onClick={() => setOpen(false)}
-                      className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg"
+                      className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg focus:outline-none"
                     >
                       Login
                     </Link>
                     <Link
                       to="/register"
                       onClick={() => setOpen(false)}
-                      className="block px-4 py-2 bg-blue-600 text-white rounded-lg text-center"
+                      className="block px-4 py-2 bg-blue-600 text-white rounded-lg text-center focus:outline-none"
                     >
                       Register
                     </Link>
@@ -240,21 +240,21 @@ const Navbar = () => {
                     <Link
                       to="/admin"
                       onClick={() => setOpen(false)}
-                      className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg"
+                      className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg focus:outline-none"
                     >
                       Admin Panel
                     </Link>
                     <Link
                       to="/admin/orders"
                       onClick={() => setOpen(false)}
-                      className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg"
+                      className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg focus:outline-none"
                     >
                       Orders
                     </Link>
                     <Link
                       to="/admin/proofs"
                       onClick={() => setOpen(false)}
-                      className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg"
+                      className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg focus:outline-none"
                     >
                       Proofs
                     </Link>
@@ -263,7 +263,7 @@ const Navbar = () => {
                         handleLogout();
                         setOpen(false);
                       }}
-                      className="block w-full text-left px-4 py-2 text-red-600 hover:bg-red-500 hover:text-white rounded-lg"
+                      className="block w-full text-left px-4 py-2 text-red-600 hover:bg-red-500 hover:text-white rounded-lg focus:outline-none"
                     >
                       Logout
                     </button>
@@ -273,14 +273,14 @@ const Navbar = () => {
                     <Link
                       to="/cart"
                       onClick={() => setOpen(false)}
-                      className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg"
+                      className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg focus:outline-none"
                     >
                       Cart {cartCount > 0 && `(${cartCount})`}
                     </Link>
                     <Link
                       to="/orders"
                       onClick={() => setOpen(false)}
-                      className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg"
+                      className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg focus:outline-none"
                     >
                       My Orders
                     </Link>
@@ -289,7 +289,7 @@ const Navbar = () => {
                         handleLogout();
                         setOpen(false);
                       }}
-                      className="block w-full text-left px-4 py-2 text-red-600 hover:bg-red-500 hover:text-white rounded-lg"
+                      className="block w-full text-left px-4 py-2 text-red-600 hover:bg-red-500 hover:text-white rounded-lg focus:outline-none"
                     >
                       Logout
                     </button>
