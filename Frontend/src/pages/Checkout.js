@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useCart } from '../contexts/CartContext';
 import { useNavigate } from 'react-router-dom';
-import PaystackButton from '../components/PaystackButton';
+import ProofUploadForm from './ProofUploadForm';
 import API_BASE_URL from '../api';
 
 const Checkout = () => {
@@ -260,16 +260,48 @@ const Checkout = () => {
 
                 <div className="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-lg">
                   <p className="text-blue-700 text-sm">
-                    <strong>Secure Payment:</strong> Your payment information is encrypted and secure.
+                    <strong>Bank Transfer Payment:</strong> Please transfer the total amount to the account below and upload your payment proof.
                   </p>
                 </div>
 
-                <div className="text-center">
-                  <PaystackButton 
-                    email={email} 
-                    amount={Math.round(grandTotal * 100)}
-                    onPaymentInit={handleOrderComplete}
+                <div className="bg-gray-50 border border-gray-200 p-6 rounded-lg mb-6">
+                  <h4 className="text-lg font-semibold text-gray-900 mb-4">Bank Account Details</h4>
+                  <div className="space-y-2">
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">Account Name:</span>
+                      <span className="font-medium text-gray-900">GIFT ONYINYECHI EZE</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">Account Number:</span>
+                      <span className="font-medium text-gray-900">8114592027</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">Bank:</span>
+                      <span className="font-medium text-gray-900">Opay</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">Amount:</span>
+                      <span className="font-medium text-gray-900">₦{grandTotal.toFixed(2)}</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-white border border-gray-200 p-6 rounded-lg">
+                  <h4 className="text-lg font-semibold text-gray-900 mb-4">Upload Payment Proof</h4>
+                  <ProofUploadForm
+                    defaultName={name}
+                    defaultEmail={email}
+                    productId={null}
                   />
+                  <div className="mt-4 text-center">
+                    <button
+                      onClick={handleOrderComplete}
+                      className="btn-primary"
+                      disabled={isProcessing}
+                    >
+                      {isProcessing ? 'Processing...' : 'Complete Order'}
+                    </button>
+                  </div>
                 </div>
 
                 {errors.payment && (
