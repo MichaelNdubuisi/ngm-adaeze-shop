@@ -1,6 +1,7 @@
 {
-  "short_name": "NGM App",
+  "short_name": "NGM Shop",
   "name": "NGM & Luxury Shop",
+  "description": "Discover exclusive luxury products at NGM Luxury Store. Shop online for high-quality items at affordable prices.",
   "icons": [
     {
       "src": "Logo.png",

@@ -89,8 +89,8 @@ const getRandomFeaturedProducts = (products, count) => {
         <meta property="og:title" content="NGM & Luxury | Premium E-commerce Store" />
         <meta property="og:description" content="Discover exclusive luxury products and premium collections at NGM & Luxury." />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://ngm-luxury.com/" />
-        <meta property="og:image" content="https://ngm-luxury.com/og-image.png" />
+        <meta property="og:url" content="https://ngm-adaeze-shop.vercel.app/" />
+        <meta property="og:image" content="https://ngm-adaeze-shop.vercel.app/Logo.png" />
         <meta name="twitter:card" content="summary_large_image" />
       </Helmet>
 

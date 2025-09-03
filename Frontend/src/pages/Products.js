@@ -60,14 +60,14 @@ const Products = () => {
   return (
     <>
       <Helmet>
-        <title>All Products | Your E-commerce Store</title>
-        <meta name="description" content="Browse all products available at Your E-commerce Store. Shop clothes, shoes, electronics, and more at unbeatable prices." />
-        <meta name="keywords" content="products, shop, ecommerce, clothes, shoes, electronics, online store" />
-        <meta property="og:title" content="All Products | Your E-commerce Store" />
-        <meta property="og:description" content="Browse all products available at Your E-commerce Store." />
+        <title>All Products | NGM & Luxury Shop</title>
+        <meta name="description" content="Browse all luxury products at NGM & Luxury Shop. Shop premium clothes, shoes, electronics, and more at affordable prices." />
+        <meta name="keywords" content="luxury products, shop, ecommerce, clothes, shoes, electronics, online store, NGM luxury" />
+        <meta property="og:title" content="All Products | NGM & Luxury Shop" />
+        <meta property="og:description" content="Browse all luxury products at NGM & Luxury Shop." />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://yourdomain.com/products" />
-        <meta property="og:image" content="https://yourdomain.com/og-image.png" />
+        <meta property="og:url" content="https://ngm-adaeze-shop.vercel.app/products" />
+        <meta property="og:image" content="https://ngm-adaeze-shop.vercel.app/Logo.png" />
         <meta name="twitter:card" content="summary_large_image" />
       </Helmet>
 
