@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 import ProductList from '../components/ProductList';
 import { useCart } from '../contexts/CartContext';
 import API_BASE_URL from '../api'; // ✅ Import the API base URL
@@ -9,9 +10,12 @@ const Products = () => {
   const { dispatch } = useCart();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
 
   const categories = ['clothes', 'shoes', 'shorts', 'electronics', 'other'];
-  const [selectedCategory, setSelectedCategory] = useState('clothes');
+  const categoryParam = searchParams.get('category') || 'clothes';
+  const [selectedCategory, setSelectedCategory] = useState(categoryParam);
 
   useEffect(() => {
     setLoading(true);
@@ -50,6 +54,10 @@ const Products = () => {
       });
   }, []);
 
+  useEffect(() => {
+    setSelectedCategory(categoryParam);
+  }, [categoryParam]);
+
   const handleAddToCart = (product) => {
     dispatch({ type: 'ADD_TO_CART', product });
   };
@@ -79,7 +87,7 @@ const Products = () => {
           {categories.map((cat) => (
             <button
               key={cat}
-              onClick={() => setSelectedCategory(cat)}
+              onClick={() => navigate(`/products?category=${cat}`)}
               className={`px-4 py-2 rounded-full border font-semibold capitalize transition-colors duration-200 ${
                 selectedCategory === cat
                   ? 'bg-blue-700 text-white border-blue-700'
