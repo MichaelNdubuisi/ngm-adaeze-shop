@@ -42,15 +42,34 @@ const ProductDetail = () => {
   return (
     <>
       <Helmet>
-        <title>Product Details | Your E-commerce Store</title>
-        <meta name="description" content="View product details, images, and pricing at Your E-commerce Store. Shop now for the best deals on quality products." />
-        <meta name="keywords" content="product, details, ecommerce, shop, buy, online store" />
-        <meta property="og:title" content="Product Details | Your E-commerce Store" />
-        <meta property="og:description" content="View product details, images, and pricing at Your E-commerce Store." />
+        <title>{product.name} | NGM & Luxury Shop</title>
+        <meta name="description" content={`Buy ${product.name} at NGM Luxury Store. ${product.description} Price: ₦${product.price}. Shop now for premium quality products.`} />
+        <meta name="keywords" content={`${product.name}, ${product.brand}, luxury ${product.category}, buy online, NGM luxury store`} />
+        <meta property="og:title" content={`${product.name} | NGM & Luxury Shop`} />
+        <meta property="og:description" content={`Buy ${product.name} at NGM Luxury Store. ${product.description} Price: ₦${product.price}.`} />
         <meta property="og:type" content="product" />
-        <meta property="og:url" content={`https://yourdomain.com/products/${id}`} />
-        <meta property="og:image" content="https://yourdomain.com/og-image.png" />
+        <meta property="og:url" content={`https://ngm-adaeze-shop.vercel.app/products/${id}`} />
+        <meta property="og:image" content={product.image} />
         <meta name="twitter:card" content="summary_large_image" />
+        <script type="application/ld+json">
+        {JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Product",
+          "name": product.name,
+          "description": product.description,
+          "image": product.image,
+          "brand": {
+            "@type": "Brand",
+            "name": product.brand
+          },
+          "offers": {
+            "@type": "Offer",
+            "price": product.price,
+            "priceCurrency": "NGN",
+            "availability": "https://schema.org/InStock"
+          }
+        })}
+        </script>
       </Helmet>
       <div className="container mx-auto py-6 sm:py-12 flex flex-col md:flex-row gap-6 sm:gap-8 px-2 sm:px-0">
         <img src={product.image} alt={product.name} className="w-full md:w-1/2 h-64 sm:h-96 object-cover rounded-lg shadow-md mb-4 md:mb-0" />

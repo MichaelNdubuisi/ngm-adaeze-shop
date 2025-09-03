@@ -14,6 +14,7 @@ import AdminLogin from './pages/AdminLogin';
 import Orders from './pages/Orders';
 import Checkout from './pages/Checkout';
 import AdminOrders from './pages/AdminOrders';
+import About from './pages/About';
 import ProtectedRoute from './components/ProtectedRoute';
 import { CartProvider } from './contexts/CartContext';
 
@@ -25,6 +26,7 @@ function App() {
           <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
           <Route path="/products" element={<Products />} />
           <Route path="/products/:id" element={<ProductDetail />} />
           <Route path="/cart" element={<Cart />} />
