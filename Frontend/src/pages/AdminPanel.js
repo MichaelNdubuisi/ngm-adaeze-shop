@@ -13,7 +13,7 @@ const AdminPanel = () => {
     price: '',
     countInStock: '',
     image: null,
-    sizes: '',
+    sizes: [],
   });
   const [addSuccess, setAddSuccess] = useState('');
   const [addError, setAddError] = useState('');
@@ -44,8 +44,8 @@ const AdminPanel = () => {
     formData.append('description', newProduct.description);
     formData.append('price', parseFloat(newProduct.price));
     formData.append('countInStock', parseInt(newProduct.countInStock));
-    if (newProduct.sizes) {
-      formData.append('sizes', newProduct.sizes);
+    if (newProduct.sizes.length > 0) {
+      formData.append('sizes', newProduct.sizes.join(','));
     }
     if (newProduct.image) {
       formData.append('image', newProduct.image);
@@ -71,7 +71,7 @@ const AdminPanel = () => {
           price: '',
           countInStock: '',
           image: null,
-          sizes: '',
+          sizes: [],
         });
         setImagePreview(null);
         setAddSuccess('Product added successfully!');
@@ -193,8 +193,12 @@ const AdminPanel = () => {
           {/* Display Sizes if Category is Clothes or Shoes */}
           {(newProduct.category === 'clothes' || newProduct.category === 'shoes') && (
             <>
-              <label className="font-semibold">Sizes (comma separated)</label>
-              <input type="text" value={newProduct.sizes} onChange={e => setNewProduct({ ...newProduct, sizes: e.target.value })} className="w-full p-2 rounded" required />
+              <label className="font-semibold">Sizes</label>
+              <select multiple value={newProduct.sizes} onChange={e => { const values = Array.from(e.target.selectedOptions, option => option.value); setNewProduct({ ...newProduct, sizes: values }); }} className="w-full p-2 rounded" required>
+                <option value="L">L</option>
+                <option value="M">M</option>
+                <option value="S">S</option>
+              </select>
             </>
           )}
 
