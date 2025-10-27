@@ -177,12 +177,12 @@ const getRandomFeaturedProducts = (products, count) => {
                 Discover our carefully curated collections, each designed to bring luxury and elegance to your lifestyle
               </p>
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
+            <div className="grid grid-cols-6 md:grid-cols-3 lg:grid-cols-5 gap-6 md:gap-8">
               {categories.map((category, index) => (
                 <Link
                   key={category.value}
                   to={`/products?category=${category.value}`}
-                  className="group relative rounded-full text-center shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-500 border border-slate-100 hover:border-slate-200 overflow-hidden aspect-square"
+                  className="group relative rounded-full text-center shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-500 border border-slate-100 hover:border-slate-200 overflow-hidden aspect-square max-w-[160px] md:max-w-[120px]"
                   style={{ animationDelay: `${index * 0.1}s` }}
                 >
                   {/* Image covering the entire card */}
@@ -193,11 +193,11 @@ const getRandomFeaturedProducts = (products, count) => {
                   />
 
                   {/* Overlay for better text readability */}
-                  <div className="absolute inset-0 bg-black/20 rounded-full group-hover:bg-black/10 transition-colors duration-500"></div>
+                  <div className="absolute inset-0 bg-black/30 md:bg-black/20 rounded-full group-hover:bg-black/10 transition-colors duration-500"></div>
 
                   {/* Category Name */}
                   <div className="absolute inset-0 flex items-center justify-center">
-                    <h3 className="font-bold text-white text-lg drop-shadow-lg">
+                    <h3 className="font-semibold text-sm text-white drop-shadow-lg">
                       {category.name}
                     </h3>
                   </div>
