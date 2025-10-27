@@ -36,12 +36,11 @@ const Home = () => {
   const [bannerIndex, setBannerIndex] = useState(0);
 
   const categories = [
-    { name: 'All Products', value: 'all', icon: '🛍️' },
-    { name: 'Clothing', value: 'clothes', icon: '👕' },
-    { name: 'Shoes', value: 'shoes', icon: '👟' },
-    { name: 'Phones', value: 'phone', icon: '📱' },
-    { name: 'Electronics', value: 'electronics', icon: '💻' },
-    { name: 'Accessories', value: 'other', icon: '⌚' }
+    { name: 'Clothing', value: 'clothes', image: 'https://images.unsplash.com/photo-1445205170230-053b83016050?w=300&h=300&fit=crop' },
+    { name: 'Shoes', value: 'shoes', image: 'https://images.unsplash.com/photo-1549298916-b41d501d3772?w=300&h=300&fit=crop' },
+    { name: 'Phones', value: 'phone', image: 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=300&h=300&fit=crop' },
+    { name: 'Electronics', value: 'electronics', image: 'https://images.unsplash.com/photo-1498049794561-7780e7231661?w=300&h=300&fit=crop' },
+    { name: 'Accessories', value: 'other', image: 'https://images.unsplash.com/photo-1524592094714-0f0654e20314?w=300&h=300&fit=crop' }
   ];
 
   useEffect(() => {
@@ -94,14 +93,14 @@ const getRandomFeaturedProducts = (products, count) => {
         <meta name="twitter:card" content="summary_large_image" />
       </Helmet>
 
-      <div className="min-h-screen bg-gradient-to-br from-white via-blue-50 to-purple-100">
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50">
         {/* Hero Banner */}
-        <section className="relative h-96 md:h-[500px] overflow-hidden">
+        <section className="relative h-[500px] md:h-[600px] lg:h-[700px] overflow-hidden">
           {bannerImages.map((img, idx) => (
             <div
               key={idx}
-              className={`absolute inset-0 transition-opacity duration-1000 ${
-                bannerIndex === idx ? 'opacity-100 z-10' : 'opacity-0 z-0'
+              className={`absolute inset-0 transition-all duration-1500 ease-in-out ${
+                bannerIndex === idx ? 'opacity-100 z-10 scale-100' : 'opacity-0 z-0 scale-105'
               }`}
             >
               <img
@@ -109,31 +108,35 @@ const getRandomFeaturedProducts = (products, count) => {
                 alt={`Banner ${idx + 1}`}
                 className="w-full h-full object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-black/40" />
+              <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
             </div>
           ))}
-          
+
           {/* Banner Content */}
-          <div className="relative z-20 h-full flex items-center justify-center text-center px-4">
-            <div className="max-w-4xl mx-auto">
+          <div className="relative z-20 h-full flex items-center justify-center text-center px-6 lg:px-8">
+            <div className="max-w-5xl mx-auto">
               {bannerContent.map((content, idx) => (
                 <div
                   key={idx}
-                  className={`absolute inset-0 flex flex-col items-center justify-center transition-opacity duration-1000 ${
-                    bannerIndex === idx ? 'opacity-100' : 'opacity-0'
+                  className={`absolute inset-0 flex flex-col items-center justify-center transition-all duration-1000 ${
+                    bannerIndex === idx ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
                   }`}
                 >
-                  <h1 className="text-3xl md:text-5xl lg:text-6xl font-playfair font-bold text-white mb-4 md:mb-6 leading-tight">
+                  <h1 className="text-4xl md:text-6xl lg:text-7xl font-playfair font-bold text-white mb-6 leading-tight tracking-tight">
                     {content.title}
                   </h1>
-                  <p className="text-lg md:text-xl text-white/90 mb-8 md:mb-10 max-w-2xl mx-auto leading-relaxed">
+                  <p className="text-xl md:text-2xl lg:text-3xl text-white/95 mb-10 max-w-3xl mx-auto leading-relaxed font-light">
                     {content.description}
                   </p>
                   <Link
                     to={content.link}
-                    className="btn-primary text-lg px-8 py-4 animate-bounce-gentle"
+                    className="group relative inline-flex items-center justify-center px-10 py-5 bg-white text-slate-900 font-semibold text-lg rounded-full shadow-2xl hover:shadow-3xl transform hover:scale-105 transition-all duration-300 overflow-hidden"
                   >
-                    {content.buttonText}
+                    <span className="relative z-10">{content.buttonText}</span>
+                    <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <div className="absolute inset-0 bg-white opacity-100 group-hover:opacity-0 transition-opacity duration-300"></div>
+                    <span className="relative z-10 text-slate-900 group-hover:text-white transition-colors duration-300">{content.buttonText}</span>
                   </Link>
                 </div>
               ))}
@@ -141,38 +144,66 @@ const getRandomFeaturedProducts = (products, count) => {
           </div>
 
           {/* Banner Indicators */}
-          <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex gap-3 z-20">
+          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex gap-4 z-20">
             {bannerImages.map((_, idx) => (
               <button
                 key={idx}
                 onClick={() => setBannerIndex(idx)}
-                className={`w-4 h-4 rounded-full transition-all duration-300 ${
+                className={`w-3 h-3 rounded-full transition-all duration-300 ${
                   bannerIndex === idx
-                    ? 'bg-white scale-110 shadow-lg'
-                    : 'bg-white/50 border border-white/30'
+                    ? 'bg-white scale-125 shadow-xl'
+                    : 'bg-white/60 hover:bg-white/80 border border-white/40'
                 }`}
               />
             ))}
           </div>
+
+          {/* Scroll Indicator */}
+          <div className="absolute bottom-6 right-8 z-20 animate-bounce">
+            <div className="w-6 h-10 border-2 border-white/60 rounded-full flex justify-center">
+              <div className="w-1 h-3 bg-white/60 rounded-full mt-2 animate-pulse"></div>
+            </div>
+          </div>
         </section>
 
          {/* Categories Section */}
-        <section className="py-16 bg-gray-50">
+        <section className="py-20 bg-gradient-to-br from-slate-50 to-white">
           <div className="container-custom">
-            <h2 className="section-title">Shop by Category</h2>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
-              {categories.map((category) => (
+            <div className="text-center mb-16">
+              <h2 className="text-4xl md:text-5xl font-playfair font-bold text-slate-900 mb-4">
+                Shop by Category
+              </h2>
+              <p className="text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed">
+                Discover our carefully curated collections, each designed to bring luxury and elegance to your lifestyle
+              </p>
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
+              {categories.map((category, index) => (
                 <Link
                   key={category.value}
                   to={`/products?category=${category.value}`}
-                  className="card p-6 text-center hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 group"
+                  className="group relative rounded-full text-center shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-500 border border-slate-100 hover:border-slate-200 overflow-hidden aspect-square"
+                  style={{ animationDelay: `${index * 0.1}s` }}
                 >
-                  <div className="text-3xl mb-3 group-hover:scale-110 transition-transform duration-300">
-                    {category.icon}
+                  {/* Image covering the entire card */}
+                  <img
+                    src={category.image}
+                    alt={category.name}
+                    className="absolute inset-0 w-full h-full object-cover rounded-full group-hover:scale-105 transition-transform duration-500"
+                  />
+
+                  {/* Overlay for better text readability */}
+                  <div className="absolute inset-0 bg-black/20 rounded-full group-hover:bg-black/10 transition-colors duration-500"></div>
+
+                  {/* Category Name */}
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <h3 className="font-bold text-white text-lg drop-shadow-lg">
+                      {category.name}
+                    </h3>
                   </div>
-                  <h3 className="font-semibold text-gray-900 group-hover:text-blue-600 transition-colors duration-300">
-                    {category.name}
-                  </h3>
+
+                  {/* Hover Effect Border */}
+                  <div className="absolute inset-0 rounded-full border-2 border-transparent group-hover:border-white/50 transition-all duration-500"></div>
                 </Link>
               ))}
             </div>

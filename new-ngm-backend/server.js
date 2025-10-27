@@ -3,7 +3,6 @@ require('dotenv').config({ path: __dirname + '/.env' });
 const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
-const dotenv = require('dotenv');
 const cors = require('cors');
 const helmet = require('helmet');
 const compression = require('compression');
@@ -15,8 +14,6 @@ const uploadRoutes = require('./routes/uploadRoutes');
 const paymentRoutes = require('./routes/paymentRoutes');
 const paystackWebhook = require('./routes/paystackWebhook'); // Webhook
 const paymentProofRoutes = require('./routes/paymentProofRoutes');
-
-dotenv.config();
 const app = express();
 
 // Middleware to handle raw body for webhook
@@ -104,7 +101,8 @@ app.use((err, req, res, next) => {
 
 // MongoDB connection & server startup
 const PORT = process.env.PORT || 5000;
-mongoose.connect(process.env.MONGO_URI)
+const mongoUri = process.env.MONGO_URI || 'mongodb+srv://mrmichaelndubuisi:Adaezegift@cluster0.6ay5ink.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
+mongoose.connect(mongoUri)
   .then(() => {
     console.log('✅ MongoDB connected');
     app.listen(PORT, () => {
