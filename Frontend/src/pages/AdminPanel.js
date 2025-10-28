@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import AdminLayout from '../components/AdminLayout';
-import AdminPaymentProofs from '../components/AdminPaymentProofs';
 import API_BASE_URL from '../api';
 
 const AdminPanel = () => {
@@ -126,7 +125,6 @@ const AdminPanel = () => {
           <h1 className="text-3xl font-bold text-gray-900 mb-2">Admin Dashboard</h1>
           <p className="text-gray-600">Manage products, orders, and payment proofs</p>
         </div>
-        <AdminPaymentProofs />
 
         {/* Quick Stats */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">

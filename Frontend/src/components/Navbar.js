@@ -52,7 +52,7 @@ const Navbar = () => {
 
             {isLoggedIn && (
               <span className="hidden sm:inline text-gray-700 font-medium bg-blue-50 px-3 py-1 rounded-lg">
-                Hi, {lastName}! 
+                Welcome, {lastName}! 
               </span>
             )}
           </div>
@@ -199,7 +199,7 @@ const Navbar = () => {
             <div className="p-4 space-y-4">
               {isLoggedIn && (
                 <div className="text-center text-gray-700 font-medium">
-                  Hi, {lastName}! 🌟
+                  Hi, {lastName}! 
                 </div>
               )}
 

@@ -1,8 +1,4 @@
-# TODO: Implement Category Routes for Products
+# TODO: Fix Category Filtering for Shoes
 
-## Tasks
-- [x] Update Products.js to use URL query parameters for category filtering
-- [x] Import useSearchParams and useNavigate from react-router-dom
-- [x] Read category from URL params and set selectedCategory state
-- [x] Update category buttons to navigate to /products?category=cat
-- [ ] Test category navigation and filtering
+- [x] Update productController.js to make category filtering case-insensitive using regex
+- [ ] Test the route http://localhost:3000/products?category=shoes to confirm only shoes are displayed
