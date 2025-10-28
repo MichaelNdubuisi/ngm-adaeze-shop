@@ -34,7 +34,8 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 const allowedOrigins = [
   'http://localhost:3000', // dev
   'https://ngm-adaeze-shop.vercel.app', // Vercel frontend
-  'https://ngm-adaeze-shop-he05eoge8-michaels-projects-2c53cb3e.vercel.app' // Old Vercel URL
+  'https://ngm-adaeze-shop-he05eoge8-michaels-projects-2c53cb3e.vercel.app', // Old Vercel URL
+  'https://ngm-adaeze-shop-nz0zxmywk-michaels-projects-2c53cb3e.vercel.app' // New Vercel URL
 ];
 
 app.use(cors({
