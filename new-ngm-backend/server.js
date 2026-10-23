@@ -41,7 +41,9 @@ const allowedOrigins = [
 app.use(cors({
   origin: function(origin, callback){
     if(!origin) return callback(null, true); // server-to-server requests
-    if(allowedOrigins.indexOf(origin) === -1){
+    const isVercelPreview =
+      /^https:\/\/ngm-adaeze-shop(?:-[a-z0-9-]+)*\.vercel\.app$/.test(origin);
+    if(allowedOrigins.indexOf(origin) === -1 && !isVercelPreview){
       const msg = 'CORS policy: this origin is not allowed';
       return callback(new Error(msg), false);
     }
