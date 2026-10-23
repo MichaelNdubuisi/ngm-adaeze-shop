@@ -3,8 +3,6 @@ import API_BASE_URL from '../api';
 
 const Orders = () => {
   const [orders, setOrders] = useState([]);
-  const [userEmail, setUserEmail] = useState('');
-
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -32,7 +30,11 @@ const Orders = () => {
   return (
     <div className="container mx-auto py-6 sm:py-8 px-2 sm:px-0">
       <h2 className="text-2xl sm:text-3xl font-bold mb-6 sm:mb-8 text-center">My Orders</h2>
-      {orders.length === 0 ? (
+      {loading ? (
+        <div className="text-center text-gray-600">Loading your orders...</div>
+      ) : error ? (
+        <div role="alert" className="text-center text-red-600">{error}</div>
+      ) : orders.length === 0 ? (
         <div className="text-center text-gray-600">You have not placed any orders yet.</div>
       ) : (
         <div className="space-y-6">

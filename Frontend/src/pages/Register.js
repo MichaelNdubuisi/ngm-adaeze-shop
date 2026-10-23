@@ -64,8 +64,7 @@ const Register = () => {
       const responseData = await response.json();
 
       // Handle the new response structure with data nesting
-      const data = responseData.data || responseData;
-      const message = responseData.message || '';
+      const message = responseData.message || responseData.data?.message || '';
 
       if (!response.ok) {
         throw new Error(message || 'Hmm, something went wrong while creating your account. Let\'s try that again! 🔄');
